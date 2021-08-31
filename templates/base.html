@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="icon" href="{{ url_for('static', filename='fevicon2.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}">
+</head>
+
+<body>
+    <header>
+        {{ title }}
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="logo">
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('foods') }}">Our Food Menu</a></li>
+            <li><a href="{{ url_for('basket') }}">Your Food Basket</a></li>
+            {% if g.user %}
+            <li>User: {{ g.user }}</li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% block main_content %}{% endblock %}
+    </main>
+
+    <aside>
+        <article>
+            <p class="focus">Fun things to do while you wait for your food</p>
+        </article>
+        <article><a href="https://cs1.ucc.ie/~uf3/cgi-bin/lab01/run.py/could_it_be_me" target="_blank">Lotto Number
+                Generator</a>
+        </article>
+        <article><a href="https://cs1.ucc.ie/~uf3/cgi-bin/lab03/run.py/shift" target="_blank">Secret Code Generator
+                Converter</a></article>
+        <article><a href="https://cs1.ucc.ie/~uf3/cgi-bin/lab03/run.py/conversion" target="_blank">Temperature
+                Converter</a></article>
+        <article><a href="https://cs1.ucc.ie/~uf3/cgi-bin/lab05/run.py/guess" target="_blank">Number Guessing Game</a>
+        </article>
+    </aside>
+
+    <footer>
+
+        <ul>
+            <p class="focus">Attributions</p>
+            <li>Webapp is based on the codes from lecture notes.</li>
+            <li><a
+                    href="https://unsplash.com/photos/4_jhDO54BYg?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink">Background
+                    Image
+                </a></li>
+            <li><a href="https://pixabay.com/photos/salad-food-italian-tasty-wooden-2068220/">Main page salad image
+                </a></li>
+            <li><a
+                    href="https://flaticons.net/customize.php?dir=Miscellaneous&icon=Restaurant.png&custom=97kTY8tPIDImIQIV5cpRVEQIy">Fevicon
+                </a></li>
+            <li><a href="https://pixabay.com/photos/platter-food-starters-meal-feast-2009590/">image in the food
+                    page
+                </a></li>
+            <li><a
+                    href="https://stackoverflow.com/questions/16087118/multiplying-and-then-summing-values-from-two-dictionaries-prices-stock">Code
+                    format to sum two dict values
+                </a></li>
+            <li><a href="https://pixabay.com/illustrations/pizza-courier-delivery-fast-1454239/">Order Confirmation
+                    image
+                </a></li>
+        </ul>
+    </footer>
+</body>
+
+</html>

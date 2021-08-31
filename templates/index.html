@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<p class="center"><img src="{{ url_for('static', filename='salad.jpg') }}" alt="salad"></p>
+<h1 class="center">Welcome {{ user }}</h1>
+<h2>Discover the best food and drinks in Cork</h2>
+
+<form class="center" action="" method="POST" novalidate>
+
+    {{ form.hidden_tag() }}
+    {{ form.dish.label }}
+    {{ form.dish() }}
+    <p>Or</p>
+    {{ form.restaurant.label }}
+    {{ form.restaurant() }}
+    <br />
+    <br />
+    {{ form.submit() }}
+
+</form>
+
+{% if foods %}
+<table>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Restaurant</th>
+    <th>Description</th>
+    <th>Add to Basket</th>
+    {% for food in foods%}
+    <tr>
+        <td><a href="{{ url_for('food', food_id=food['food_id']) }}">{{ food["name"] }}</a></td>
+        <td>{{ food["price"] }}</td>
+        <td>{{ food["restaurant"] }}</td>
+        <td>{{ food["info"] }}</td>
+        <td><a class="focus" href="{{ url_for('add_to_basket', food_id=food['food_id']) }}">Add+</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}

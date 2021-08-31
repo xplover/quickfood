@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h1>Your Food Basket</h1>
+{% if basket %}
+<table>
+    <tr>
+        <th>Dish Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th colspan="3">Edit Basket</th>
+        <th>Total</th>
+    </tr>
+    {% for food_id in basket %}
+    <tr>
+        <td><a class="focus" href="{{ url_for('food', food_id=food_id) }}">{{ names[food_id] }}</a></td>
+        <td>{{ basket[food_id] }}</td>
+        <td>{{ price[food_id] }}</td>
+        <td><a href="{{ url_for('add_to_basket', food_id=food_id) }}">Add More+</a></td>
+        <td><a href="{{ url_for('less_to_basket', food_id=food_id) }}">Less Quantity</a></td>
+        <td><a href="{{ url_for('delete_food', food_id=food_id) }}">Delete Dish</a></td>
+        <td>{{ basket[food_id] * price[food_id] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p class="focus"><a href="{{ url_for('clear_basket') }}">Clear Basket</a></p>
+<h2>Total Payable Amount is {{ total }}</h2>
+<h3>Please provide Address and Phone Number and press Submit to confirm your order.</h3>
+
+<form action="" method="POST" novalidate>
+
+    {{ form.hidden_tag() }}
+    {{ form.address.label }}
+    {{ form.address() }}
+    {% for error in form.address.errors %}
+    {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.phone.label }}
+    {{ form.phone() }}
+    {% for error in form.phone.errors %}
+    {{ error }}
+    {% endfor %}
+    <br />
+    <br />
+    {{ form.submit() }}
+
+</form>
+
+{% else %}
+<p>Your basket is empty!</p>
+{% endif %}
+
+
+{% endblock %}

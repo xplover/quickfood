@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<h1>Our Food Menu</h1>
+<p>Click on the food name to know more.</p>
+<table>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Restaurant</th>
+    <th>Description</th>
+    <th>Add to Basket</th>
+    {% for food in foods %}
+    <tr>
+        <td class="pointer"><a href="{{ url_for('food', food_id=food['food_id']) }}">{{ food["name"] }}</a></td>
+        <td>{{ food["price"] }}</td>
+        <td>{{ food["restaurant"] }}</td>
+        <td>{{ food["info"] }}</td>
+        <td><a class="focus" href="{{ url_for('add_to_basket', food_id=food['food_id']) }}">Add+</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

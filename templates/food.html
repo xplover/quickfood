@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+<p class="center"><img src="{{ url_for('static', filename='food.jpg') }}" alt="food"></p>
+<h1>{{ food["name"] }}</h1>
+<p>Price: {{ food["price"] }} Euros</p>
+<p>Serving for two person</p>
+<p>Description: {{ food["info"] }}</p>
+<p class="focus"><a href="{{ url_for('add_to_basket', food_id=food['food_id']) }}">Add to Basket +</a></p>
+<br />
+<br />
+
+
+<form class="center" action="" method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    {{ form.name.label }}
+    {{ form.name() }}
+    <br />
+    {{ form.comment.label }}
+    {{ form.comment() }}
+    <br />
+    <br />
+    {{ form.submit() }}
+    <br />
+    <br />
+</form>
+
+
+<table>
+    <tr>
+        <th>User's</th>
+        <th>Comment</th>
+    </tr>
+    {% for feedback in feedbacks %}
+    <tr>
+        <td>{{ feedback["name"] }}</td>
+        <td>{{ feedback["comment"] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
